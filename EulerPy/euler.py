@@ -35,10 +35,10 @@ def generate(p, prompt_default=True):
     problemHeader += '=' * len(problemHeader.strip()) + '\n\n'
 
     with open(p.filename, 'w') as file:
-        file.write('"""\n')
+        file.write('/*\n')
         file.write(problemHeader)
         file.write(problemText)
-        file.write('"""\n\n\n')
+        file.write('*/\n\n\n')
 
     click.secho('Successfully created "{0}".'.format(p.filename), fg='green')
 
@@ -69,7 +69,7 @@ def verify(p, filename=None, exit=True):
 
     if not os.path.isfile(filename):
         # Attempt a fuzzy search for problem files using the glob module
-        for fuzzy_file in glob.glob('{0:03d}*.py'.format(p.num)):
+        for fuzzy_file in glob.glob('{0:03d}*.swift'.format(p.num)):
             if os.path.isfile(fuzzy_file):
                 filename = fuzzy_file
                 break
@@ -80,7 +80,7 @@ def verify(p, filename=None, exit=True):
     solution = p.solution
     click.echo('Checking "{0}" against solution: '.format(filename), nl=False)
 
-    cmd = [sys.executable or 'python', filename]
+    cmd = ['swift', '-i', filename]
     start = clock()
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     stdout = proc.communicate()[0]
@@ -141,7 +141,7 @@ def verify_all(current_p):
     overview = {}
 
     # Search through problem files using glob module
-    for filename in glob.glob('[0-9][0-9][0-9]*.py'):
+    for filename in glob.glob('[0-9][0-9][0-9]*.swift'):
         p = Problem(int(filename[:3]))
 
         # Catch KeyboardInterrupt during verification to allow the user
@@ -239,7 +239,7 @@ def main(option, problem):
     # No problem given (or given option ignores the problem argument)
     if problem == 0 or option in (skip, verify_all):
         # Determine the highest problem number in the current directory
-        for filename in glob.glob('[0-9][0-9][0-9]*.py'):
+        for filename in glob.glob('[0-9][0-9][0-9]*.swift'):
             num = int(filename[:3])
             if num > problem:
                 problem = num
@@ -268,7 +268,7 @@ def main(option, problem):
 
     # Problem given but no option; decide between generate and verify
     elif not option:
-        match_found = any(glob.iglob('{0:03d}*.py'.format(problem)))
+        match_found = any(glob.iglob('{0:03d}*.swift'.format(problem)))
         option = verify if match_found else generate
 
     # Execute function based on option (pass Problem object as argument)

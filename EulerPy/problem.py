@@ -14,12 +14,12 @@ class Problem(object):
     @property
     def filename(self, width=3):
         """Returns filename padded with leading zeros"""
-        return '{0:0{w}d}.py'.format(self.num, w=width)
+        return '{0:0{w}d}.swift'.format(self.num, w=width)
 
 
     def suf_name(self, suffix, width=3):
         """Returns filename with a suffix padded with leading zeros"""
-        return '{0:0{w}d}{1}.py'.format(self.num, '-' + suffix, w=width)
+        return '{0:0{w}d}{1}.swift'.format(self.num, '-' + suffix, w=width)
 
 
     @property
