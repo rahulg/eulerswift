@@ -1,5 +1,5 @@
 ***********************
-EulerPy |Travis| |PyPI|
+EulerPy
 ***********************
 
 EulerPy is a command line tool designed to streamline the process of solving
@@ -41,7 +41,7 @@ are being stored.
 
 
 At this point, you'll probably want to run the ``euler`` command, which will
-prompt to create ``001.py``, a file containing the text to Project Euler problem
+prompt to create ``001.swift``, a file containing the text to Project Euler problem
 #1 as its docstring.
 
 .. code-block:: bash
@@ -49,10 +49,10 @@ prompt to create ``001.py``, a file containing the text to Project Euler problem
     $ euler
     No Project Euler files found in the current directory.
     Generate file for problem 1? [Y/n]: Y
-    Successfully created "001.py".
+    Successfully created "001.swift".
 
-    $ cat 001.py
-    """
+    $ cat 001.swift
+    /*
     Project Euler Problem 1
     =======================
 
@@ -60,7 +60,7 @@ prompt to create ``001.py``, a file containing the text to Project Euler problem
     we get 3, 5, 6 and 9. The sum of these multiples is 23.
 
     Find the sum of all the multiples of 3 or 5 below 1000.
-    """
+    */
 
 At this point, you can open up your editor of choice and code up a solution
 to the problem, making sure to ``print()`` the output. Once you feel that
@@ -73,13 +73,13 @@ time elapsed during the solution-checking process will also be printed.
 .. code-block:: bash
 
     $ euler
-    Checking "001.py" against solution: [no output] # (output in red)
+    Checking "001.swift" against solution: [no output] # (output in red)
 
-    $ echo print 42 >> 001.py
+    $ echo "println(42)" >> 001.swift
     $ euler
-    Checking "001.py" against solution: 42 # (output in green)
+    Checking "001.swift" against solution: 42 # (output in green)
     Generate file for problem 2? [Y/n]: Y
-    Successfully created "002.py".
+    Successfully created "002.swift".
 
 
 EulerPy also comes with five options that act as commands. (The ``--help``
@@ -116,8 +116,8 @@ the user).
 
     $ euler --generate
     Generate file for problem 2? [Y/n]: Y
-    "002.py" already exists. Overwrite? [y/N]:
-    Successfully created "002.py".
+    "002.swift" already exists. Overwrite? [y/N]:
+    Successfully created "002.swift".
 
     $ euler --generate 5
     Generate file for problem 5? [Y/n]: n
@@ -128,8 +128,8 @@ the user).
 
 .. code-block:: bash
 
-    $ cat 005.py
-    cat: 005.py: No such file or directory
+    $ cat 005.swift
+    cat: 005.swift: No such file or directory
 
     $ euler 5
     Generate file for problem 5? [Y/n]: n
@@ -169,7 +169,7 @@ The ``--skip`` option will prompt the user to "skip" to the next problem.
     $ euler --skip
     Current problem is problem 2.
     Generate file for problem 3? [y/N]: Y
-    Successfully created "003.py".
+    Successfully created "003.swift".
 
 
 ``--verify / -v``
@@ -182,17 +182,17 @@ check the current problem.
 .. code-block:: bash
 
     $ euler --verify
-    Checking "003.py" against solution: [no output] # (output in red)
+    Checking "003.swift" against solution: [no output] # (output in red)
 
     $ euler --verify 1
-    Checking "001.py" against solution: <redacted> # (output in green)
+    Checking "001.swift" against solution: <redacted> # (output in green)
 
 ``euler <problem>`` is equivalent to ``euler --verify <problem>`` if the file
 **does** exist.
 
 .. code-block:: bash
 
-    $ cat 001.py
+    $ cat 001.swift
     """
     Project Euler Problem 1
     =======================
@@ -202,7 +202,7 @@ check the current problem.
     """
 
     $ euler 1
-    Checking "001.py" against solution: <redacted>
+    Checking "001.swift" against solution: <redacted>
 
 
 ============
@@ -230,23 +230,3 @@ License
 =======
 
 EulerPy is licensed under the `MIT License`_.
-
-
-.. |Travis| image:: http://img.shields.io/travis/iKevinY/EulerPy/master.svg?style=flat
-            :alt: Build Status
-            :target: http://travis-ci.org/iKevinY/EulerPy
-
-.. |PyPI| image:: http://img.shields.io/pypi/v/EulerPy.svg?style=flat
-          :alt: PyPI Version
-          :target: https://pypi.python.org/pypi/EulerPy/
-
-.. _pip: http://www.pip-installer.org/en/latest/index.html
-.. _CONTRIBUTING.rst: https://github.com/iKevinY/EulerPy/blob/master/CONTRIBUTING.rst
-.. _Local Euler: http://kmkeen.com/local-euler/
-.. _problems.txt: https://github.com/iKevinY/EulerPy/blob/master/EulerPy/problems.txt
-.. _solutions.txt: https://github.com/iKevinY/EulerPy/blob/master/EulerPy/solutions.txt
-.. _projecteuler-solutions wiki: https://code.google.com/p/projecteuler-solutions/
-.. _this blog post: http://kevinyap.ca/2014/06/eulerpy-streamlining-project-euler/
-.. _click: https://github.com/mitsuhiko/click
-.. _MIT License: https://github.com/iKevinY/EulerPy/blob/master/LICENSE
-
