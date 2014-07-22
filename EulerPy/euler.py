@@ -80,7 +80,7 @@ def verify(p, filename=None, exit=True):
     solution = p.solution
     click.echo('Checking "{0}" against solution: '.format(filename), nl=False)
 
-    cmd = ['swift', '-i', filename]
+    cmd = ['swift', '-O3', '-i', filename]
     start = clock()
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     stdout = proc.communicate()[0]
